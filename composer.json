@@ -1,0 +1,29 @@
+{
+	"name": "macfly/yii2-api-user-rbac",
+	"description": "Yii2 module to expose identity and rbac through a restful API",
+	"keywords": ["yii2", "server", "user", "rbac"],
+	"type": "yii2-extension",
+	"license": "BSD-3-Clause",
+	"support": {
+		"issues": "https://github.com/Marty-Macfly/yii2-api-user-rbac/issues",
+		"source": "https://github.com/Marty-Macfly/yii2-api-user-rbac"
+	},
+	"authors": [
+		{
+			"name": "Charles DELFLY",
+			"email": "c.delfly@linkbynet.com"
+		}
+	],
+	"minimum-stability": "stable",
+	"require": {
+    "yiisoft/yii2": "~2.0.5"
+	},
+	"autoload": {
+		"psr-4": {
+			"macfly\\user\\server\\": "src/"
+		}
+	},
+  "extra": {
+    "bootstrap": "macfly\\user\\server\\Module"
+  }
+}
