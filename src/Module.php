@@ -4,7 +4,7 @@ namespace macfly\user\server;
 
 use Yii;
 
-class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
+class Module extends \yii\base\Module
 {
 	/**
 	 * @var string The prefix for user module URL.
@@ -26,30 +26,6 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
     if(Yii::$app->has('user'))
     {
       Yii::$app->user->enableSession = false;
-    }
-  }
-
-  /** @inheritdoc */
-  public function bootstrap($app)
-  {
-		if ($app instanceof ConsoleApplication) {
-			$this->controllerNamespace = 'macfly\user\server\commands';
-		} else
-		{
-			$configUrlRule = [
-				'class'		=> 'yii\web\GroupUrlRule',
-				'prefix'	=> $this->urlPrefix,
-				'rules'		=> $this->urlRules,
-			];
-
-			if ($this->urlPrefix != 'userapi')
-			{
-				$configUrlRule['routePrefix'] = 'userapi';
-			}
-
-			$rule	= Yii::createObject($configUrlRule);
-
-			$app->urlManager->addRules([$rule], false);
     }
   }
 }

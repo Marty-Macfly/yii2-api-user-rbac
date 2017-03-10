@@ -24,6 +24,6 @@
 		}
 	},
   "extra": {
-    "bootstrap": "macfly\\user\\server\\Module"
+    "bootstrap": "macfly\\user\\server\\Bootstrap"
   }
 }
