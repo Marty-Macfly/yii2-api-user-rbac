@@ -18,14 +18,4 @@ class Module extends \yii\base\Module
 		'rbac/<method:\w+>'			=> 'rbac/update',
 		'identity/<method:\w+>'	=> 'identity/update',
 	];
-
-  public function init()
-  {
-    parent::init();
-
-    if(Yii::$app->has('user'))
-    {
-      Yii::$app->user->enableSession = false;
-    }
-  }
 }

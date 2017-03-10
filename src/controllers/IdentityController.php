@@ -3,25 +3,12 @@
 namespace macfly\user\server\controllers;
 
 use Yii;
-use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
 
-class IdentityController extends yii\rest\Controller
+class IdentityController extends BaseController
 {
-  public function behaviors()
-  {
-    $behaviors  = parent::behaviors();
-    $behaviors['verbs']   = [
-      'class' => VerbFilter::className(),
-      'actions' => [
-        'update' => ['put'],
-      ],
-    ];
-    return $behaviors;
-  }
-
   public function actionUpdate($method)
   {
     $identity  = Yii::$app->user->identity;

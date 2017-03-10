@@ -3,24 +3,11 @@
 namespace macfly\user\server\controllers;
 
 use Yii;
-use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 
-class RbacController extends yii\rest\Controller
+class RbacController extends BaseController
 {
-  public function behaviors()
-  {
-		$behaviors	= parent::behaviors();
-		$behaviors['verbs']		= [
-			'class'		=> VerbFilter::className(),
-			'actions'	=> [
-				'update' => ['put'],
-			],
-    ];
-		return $behaviors;
-  }
-
 	public function actionUpdate($method)
 	{
 		$authManager	= Yii::$app->authManager;
