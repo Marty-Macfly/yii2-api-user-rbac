@@ -3,21 +3,12 @@
 namespace macfly\user\server\controllers;
 
 use Yii;
-use yii\helpers\ArrayHelper;
-use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
 
 class RbacController extends BaseController
 {
-    public function actionCreate($method)
+    public function actionWrite($method)
     {
-        $authManager	= Yii::$app->authManager;
-
-        if(!$authManager->hasMethod($method))
-        {
-            throw new NotFoundHttpException(sprintf("AuthManager doesn't not provide method: '%s'", $method));
-        }
-
         $args	= Yii::$app->request->post();
 
         foreach($args as $k => $arr)
@@ -29,19 +20,10 @@ class RbacController extends BaseController
             }
         }
 
-        $obj	= call_user_func_array(array($authManager, $method), $args);
-
-        if(is_object($obj))
-        {
-            $array			= ArrayHelper::toArray($obj);
-            $array['class']	=	$obj->className();
-            return $array;
-        }
-
-        return $obj;
+        return parent::call(Yii::$app->authManager, $method, $args);
     }
 
-    public function actionUpdate($method)
+    public function actionRead($method)
     {
         if(in_array($method, ['add', 'addChild', 'assign','canAddChild',
             'createPermission', 'createRole', 'remove', 'removeAll',
@@ -52,6 +34,6 @@ class RbacController extends BaseController
             throw new UnauthorizedHttpException(sprintf("Method '%s' not allowed through PUT (read access), you should use POST for write access", $method));
         }
 
-        return $this->actionCreate($method);
+        return $this->actionWrite($method);
     }
 }
