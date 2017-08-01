@@ -50,12 +50,8 @@ Configure **config/web.php** as follows
 Usage
 ------------
 
-Provide the 2 following rest controller :
+Provide the 3 following rest controller/action :
 
-* PUT /userapi/identity send request to Yii::$app->user->identity 
-* PUT|POST /userapi/rbac send request to Yii::$app->authManager
-
-You can use PUT and POST to split read and write action for [Authorization](http://www.yiiframework.com/doc-2.0/guide-security-authorization.html)
-
- 
-
+* PUT /userapi/identity/read send read request to Yii::$app->user->identity 
+* PUT /userapi/rbac/read send read request to Yii::$app->authManager
+* PUT /userapi/rbac/write send write request to Yii::$app->authManager
