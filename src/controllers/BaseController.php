@@ -7,27 +7,27 @@ use yii\filters\VerbFilter;
 
 class BaseController extends \yii\rest\Controller
 {
-	/** @inheritdoc */
-  public function behaviors()
-  {
-    $behaviors  = parent::behaviors();
-    $behaviors['verbs']   = [
-      'class' => VerbFilter::className(),
-      'actions' => [
-        'update' => ['put'],
-      ],
-    ];
-    return $behaviors;
-  }
-
-	/** @inheritdoc */
-  public function init()
-  {
-    parent::init();
-
-    if(Yii::$app->has('user'))
+    /** @inheritdoc */
+    public function behaviors()
     {
-      Yii::$app->user->enableSession = false;
+        $behaviors  = parent::behaviors();
+        $behaviors['verbs']   = [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'update' => ['put'],
+            ],
+        ];
+        return $behaviors;
     }
-  }
+
+    /** @inheritdoc */
+    public function init()
+    {
+        parent::init();
+
+        if(Yii::$app->has('user'))
+        {
+            Yii::$app->user->enableSession = false;
+        }
+    }
 }
