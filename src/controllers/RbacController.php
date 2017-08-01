@@ -5,10 +5,11 @@ namespace macfly\user\server\controllers;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 
 class RbacController extends BaseController
 {
-    public function actionUpdate($method)
+    public function actionCreate($method)
     {
         $authManager	= Yii::$app->authManager;
 
@@ -40,8 +41,17 @@ class RbacController extends BaseController
         return $obj;
     }
 
-    public function actionCreate($method)
+    public function actionUpdate($method)
     {
-        return $this->actionUpdate($method);
+        if(in_array($method, ['add', 'addChild', 'assign','canAddChild',
+            'createPermission', 'createRole', 'remove', 'removeAll',
+            'removeAllAssignments','removeAllPermissions', 'removeAllRoles',
+            'removeAllRules', 'removeChild', 'removeChildren', 'revoke',
+            'revokeAll', 'update']))
+        {
+            throw new UnauthorizedHttpException(sprintf("Method '%s' not allowed through PUT (read access), you should use POST for write access", $method));
+        }
+
+        return $this->actionCreate($method);
     }
 }
