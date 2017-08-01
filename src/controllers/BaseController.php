@@ -51,7 +51,7 @@ class BaseController extends \yii\rest\Controller
             throw new NotFoundHttpException(sprintf("Provider doesn't provide method: '%s'", $method));
         }
 
-        $obj	= call_user_func_array(array($authManager, $method), $args);
+        $obj	= call_user_func_array(array($provider, $method), $args);
 
         if(is_object($obj))
         {
