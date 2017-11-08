@@ -3,6 +3,7 @@
 namespace macfly\user\server;
 
 use Yii;
+use yii\console\Application as ConsoleApplication;
 
 class Bootstrap implements \yii\base\BootstrapInterface
 {
